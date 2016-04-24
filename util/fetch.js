@@ -1,14 +1,15 @@
-import { default as Fetch } from 'isomorphic-fetch';
+// import { default as Fetch } from './ajax';
+import { default as Fetch } from 'isomorphic-fetch'
 import { isEmpty, map } from "lodash";
 const assign = Object.assign;
-const proxyUrl = "http://localhost:3000/proxy.do";
+const proxyUrl = "/proxy.do";
 
-const defaultOptions = {
+const defaultOpts = {
 	method: "POST",
-	withCredentials: true,
-	crossDomain: true
+	headers: {
+		"Content-Type": "application/json;charset=utf-8"
+	}
 }
-
 /*
 @url{String}     the fetch url
 @data{Object}    the post data
@@ -16,26 +17,18 @@ const defaultOptions = {
 @return {Promise Object} 
 */
 export default function fetch(url, data = {}, options = {}){
-	if( !isEmpty(data) ){
-		const list = map(data, (value, key) => `${key}=${value}`);
-		data = {
-			body: list.join("&")
-		}
-	}else{
-		data.method = "GET";
-	}
-	data.realUrl = url;
-	return Fetch(proxyUrl, assign({}, defaultOptions, data, options));
+	const body = {
+			data: data,
+			url: url,
+			options: options
+		};
+	return Fetch(
+		proxyUrl,
+		assign({}, 
+			defaultOpts, 
+			{
+				body: JSON.stringify(body)
+			}
+		)
+	);
 }
-
-// export default function fetch(url, data = {}, options = {}){
-// 	var post = {};
-// 	post.url = url;
-// 	post.method = "GET";
-// 	if( !isEmpty(data) ){
-// 		const list = map(data, (value, key) => `${key}=${value}`);
-// 		post.content = list.join("&")
-// 		post.method = "POST";
-// 	}
-// 	return Fetch(proxyUrl, assign({}, defaultOptions, { body: post }, options));
-// }

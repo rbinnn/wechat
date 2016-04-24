@@ -1,11 +1,17 @@
 var webpack = require("webpack");
+var path = require('path');
 
 module.exports = {
-  entry: "./app.js",
+  entry: './app.js',
   output: {
+    path: path.join(__dirname,"dist"),
     filename: 'bundle.js',
-    publicPath: "/"
+    publicPath: "/static/"
   },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     loaders: [
       {
