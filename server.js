@@ -1,15 +1,15 @@
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const config = require('./webpack.config');
-const app = new (require("express"))();
-const bodyParser = require('body-parser');
-const port = 3000;
-const compiler = webpack(config);
+var webpack = require('webpack');
+var webpackDevMiddleware = require('webpack-dev-middleware');
+var config = require('./webpack.config');
+var app = new (require("express"))();
+var bodyParser = require('body-parser');
+var port = 3000;
+var compiler = webpack(config);
 
 
 app.use(webpackDevMiddleware(compiler, { noInfo: true }));
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + '/index.html')

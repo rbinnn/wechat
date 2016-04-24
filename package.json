@@ -4,8 +4,11 @@
   "description": "web wechat by react",
   "main": "app.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rbin-life/wechat.git"
   },
   "keywords": [
     "wechat",
@@ -21,9 +24,8 @@
     "babel-preset-react": "^6.5.0",
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
-    "webpack": "^1.13.0",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^1.9.11",
+    "webpack-dev-middleware": "^1.2.0"
   },
   "dependencies": {
     "lodash": "^4.11.1",
