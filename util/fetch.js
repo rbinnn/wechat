@@ -17,11 +17,20 @@ const defaultOpts = {
 @return {Promise Object} 
 */
 export default function fetch(url, data = {}, options = {}){
+	/*
+		封装代理请求数据格式
+		post表示要post过去的数据
+		url表示请求的地址
+		options 配置
+	*/ 
 	const body = {
-			data: data,
-			url: url,
-			options: options
-		};
+		post: data,
+		url: url,
+		options: options
+	};
+	/*
+		返回一个promise对象	
+	*/
 	return Fetch(
 		proxyUrl,
 		assign({}, 
@@ -30,5 +39,5 @@ export default function fetch(url, data = {}, options = {}){
 				body: JSON.stringify(body)
 			}
 		)
-	);
+	).then( res => res.json() );  // json化处理返回的内容
 }

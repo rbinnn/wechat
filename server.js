@@ -2,7 +2,8 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config');
-var app = (require("express"))();
+var express = require("express")
+var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var port = 3000;
@@ -13,23 +14,28 @@ app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output
 app.use(webpackHotMiddleware(compiler));
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(express.static(__dirname+'/sources'));
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + '/index.html')
 });
 
+// 使用代理的方式解决跨域问题
 app.post("/proxy.do", function(req, res){
 	Promise
 	.resolve(req.body)
 	.then(hasUrl)
 	.then(proxy)
-	.then(res.end)
+	.then(function(data){
+		res.json(data);
+	})
+	// .then(res.json.bind(this))
 	.catch(function(err){
 		// 出错的话封装一个错误json对象返回
 		var errObj = {
 			error: err
 		}
-		res.end(JSON.stringify(errObj));
+		res.json(JSON.stringify(errObj));
 	});
 });
 
@@ -39,21 +45,31 @@ app.listen(port, function(err){
 	}
 });
 
-
+/*
+  	这里data的数据结构为
+	{
+		post: data,
+		url: url,
+		options: options
+	};
+	post表示要post过去的数据
+	url表示请求的地址
+	options 配置
+*/
 function proxy(data){
-	console.log(data)
 	return new Promise(function(resolve, reject){
+		// wechat后台只支持Content-Type: application/x-www-form-urlencoded
 		request(
 			data.url,
 			{
-				form: data.data,
+				form: data.post,
 				method: data.options.method || "GET"
 			}, 
 			function(err, res){
 				if(err){
-					reject(err)
+					reject(err);
 				}else{
-					resolve(res.body)
+					resolve(res.body);
 				}
 			}
 		);

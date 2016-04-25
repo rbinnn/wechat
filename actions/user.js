@@ -26,11 +26,10 @@ function loginPost(user, pass){
 			method: "POST"
 		})
   		.then(json => {
-	      	console.log(json);
+	      	console.log("hellp,  ", json);
 	    })
 	}
 }
-
 
 const UserAction = {
 	loginPost: loginPost
