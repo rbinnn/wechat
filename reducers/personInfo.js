@@ -4,7 +4,9 @@ const assign = Object.assign;
 export default function personInfo(state = {}, action){
 	switch(action.type){
 		case Statue.LOGINED:
-		return assign({}, state, { userid: action.userid });
+			return assign({}, state, { userid: action.userid });
+		case Info.GETINFO:
+			return assign({}, state, action.data);
 	}
 	return state;
 }

@@ -10,6 +10,7 @@ var port = 5000;
 var compiler = webpack(config);
 var request = require("request");
 var logger = require("./middlewares/server_log");
+var cookies; // cookie，代理跨域不会自动发送cookie
 
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
@@ -57,6 +58,7 @@ app.listen(port, function(err){
 	url表示请求的地址
 	options 配置
 */
+
 function proxy(data){
 	return new Promise(function(resolve, reject){
 		// wechat后台只支持Content-Type: application/x-www-form-urlencoded
@@ -64,11 +66,17 @@ function proxy(data){
 			data.url,
 			{
 				form: data.post,
-				method: data.options && data.options.method || "GET"
+				method: data.options && data.options.method || "GET",
+				headers:{
+					Cookie: cookies // 手动发送Cookie
+				}
 			}, 
 			function(err, res){
+				// 记录cookie
+				cookies = res.headers["set-cookie"] || cookies;
 				// 日志记录，debug的时候可以分析请求与响应
 				logger.log(res);
+				logger.log(res.headers["set-cookie"]);
 				if(err){
 					reject(err);
 				}else{

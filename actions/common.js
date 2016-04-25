@@ -1,5 +1,5 @@
 import fetch from '../util/fetch';
-import { Statue, Info } from "../constants";
+import { Info } from "../constants";
 import Api from "../constants/Api";
 
 function getInfo(userid){
@@ -10,7 +10,6 @@ function getInfo(userid){
 			method: "POST"
 		})
   		.then(json => {
-  			console.log("hello!!!,", json);
   			if( json.statue && json.statue === "error" ){
   				dispatch(getInfoError(json.error));
   			}else{
@@ -37,9 +36,25 @@ function getInfoError(error){
 	}
 }
 
-
-const CommonActions = {
-	getInfo
+function checkIsLogin(){
+	return (dispatch, getState) => {
+		return fetch(Api.checkIsLogin)
+  		.then(json => {
+  			if( json.statue && json.statue === "success" ){  				
+	      		dispatch(getInfoSuccess(json));
+  			}else{
+  				dispatch(getInfoError(json.error));
+  			}
+	    })
+	    .catch(err => {
+	    	dispatch(getInfoError(err))
+	    });
+	}	
 }
 
-export default CommonActions;
+const common = {
+	getInfo,
+	checkIsLogin
+}
+
+export default common;

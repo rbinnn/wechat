@@ -2,12 +2,14 @@ import fetch from '../util/fetch';
 import { Statue } from "../constants";
 import Api from "../constants/Api";
 
+// 登录中
 function logining(){
 	return {
 		type: Statue.LOGINING
 	}
 }
 
+// 登录失败
 function loginFail(error){
 	return {
 		type: Statue.LOGINERROR,
@@ -15,16 +17,11 @@ function loginFail(error){
 	}
 }
 
+// 登录失败
 function loginSuccess(userid){
 	return {
 		type: Statue.LOGINED,
 		userid
-	}
-}
-
-function logoutSuccess(){
-	return {
-		type: Statue.LOGOUTED
 	}
 }
 
@@ -51,9 +48,8 @@ function loginPost(user, pass){
 	}
 }
 
-
-const UserActions = {
+const login = {
 	loginPost
 }
 
-export default UserActions;
+export default login;

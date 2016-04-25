@@ -16,5 +16,11 @@ const Info = {
 	UPDATEREMARKERROR: "UPDATEREMARKERROR"
 }
 
+// 好友相关的状态
+const Friend = {
+	GETFRIENDS: "GETFRIENDS",
+	GETFRIENDSERROR: "GETFRIENDSERROR"
+}
 
-export { Statue, Info };
+
+export { Statue, Info, Friend };

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import UserActions from "../actions/user";
+import { loginAction } from "../actions";
 import { Statue } from "../constants";
 
 class LoginBox extends Component{
@@ -17,6 +17,7 @@ class LoginBox extends Component{
 		if( !user || !pass ){
 			return;
 		}
+		console.log(this.props.actions)
 		this.props.actions.loginPost(user, pass);
 	}
 
@@ -53,11 +54,9 @@ function mapStateToProps(state){
 	};
 }
 
-// console.log("UserActions", typeof UserActions, UserActions)
-
 function mapDispatchToProps(dispatch){
 	return {		
-		actions: bindActionCreators(UserActions, dispatch)
+		actions: bindActionCreators(loginAction, dispatch)
 	}
 }
 

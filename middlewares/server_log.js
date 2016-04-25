@@ -2,15 +2,20 @@
 * 日志记录
 */
 var log4js = require("log4js"),
+	fs = require("fs"),
+	path = require("path"),
 	isInit = false,
 	maxSize,
 	backups,
 	level,
 	appenders,
-	networkLog;
+	networkLog,
+	networkLogFile = "log/network.log";
 	// typeList = ["debug", "info", "warn", "error"];
 
 function init(){
+
+	doFile();
 
 	level = "INFO";
 
@@ -18,7 +23,7 @@ function init(){
 		{
 			type: "file",
 			categeory: "network",
-			filename: "log/network.log",
+			filename: networkLogFile,
 			backups: backups || 10,
 			maxLogSize: maxSize || 1024000000
 		}
@@ -27,7 +32,7 @@ function init(){
 	// 配置 log4js
     log4js.configure({
         appenders: appenders,
-        replaceConsole: true
+        replaceConsole: false
     });
 
     // 配置单个日志
@@ -35,9 +40,23 @@ function init(){
     networkLog.setLevel(level);
     isInit = true;
 
-    log("log init network ---------- ");
+    log("log init network log ---------- ");
 
 }
+
+function doFile(){
+	try{
+		// 尝试删除日志文件
+		var p = path.resolve(__dirname, "../", networkLogFile);
+		var stats = fs.statSync(p);
+		if( stats.isFile() ){
+			fs.unlinkSync(p);
+		}		
+	}catch(e){
+		// 错误就不管了
+	}
+}
+
 
 function log(){
 	var args = [].slice.apply(arguments);
