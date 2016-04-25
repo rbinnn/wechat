@@ -1,5 +1,5 @@
-// const baseUrl = "http://cheewp.duapp.com/WeChat/";
-const baseUrl = "http://localhost/wechat/";
+const baseUrl = "http://cheewp.duapp.com/WeChat/";
+// const baseUrl = "http://localhost/wechat/";
 
 /** 后台访问的接口API
 */

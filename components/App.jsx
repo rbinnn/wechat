@@ -15,14 +15,14 @@ class App extends Component{
 			message, 
 			actions 
 		} = this.props;
-		console.log(statue)
 		const isLogin = statue !== "LOGOUTED";
-
+		console.log(statue)
 		return (
 			<div>
 				{ isLogin ? 
-					<MainBox />: 
+					<MainBox statue = { statue }/>: 
 					<LoginBox 
+						statue = { statue }
 						login = { actions.login }
 						post = { actions.loginPost }
 					/>  

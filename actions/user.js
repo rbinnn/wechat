@@ -8,10 +8,23 @@ function logining(){
 	}
 }
 
-function logined(data){
+function loginFail(err){
 	return {
-		type: LOGINED,
+		type: Statue.LOGINERROR,
+		error: err
+	}
+}
+
+function loginSuccess(data){
+	return {
+		type: Statue.LOGINED,
 		data: json
+	}
+}
+
+function logoutSuccess(){
+	return {
+		type: Statue.LOGOUTED
 	}
 }
 
@@ -26,8 +39,13 @@ function loginPost(user, pass){
 			method: "POST"
 		})
   		.then(json => {
-	      	console.log("hellp,  ", json);
+  			if( json.statue === "success" ){
+	      		dispatch(loginSuccess(json));
+  			}else{
+  				dispatch(loginFail(json.error));
+  			}
 	    })
+	    .catch(err => dispatch(loginFail(err)));
 	}
 }
 

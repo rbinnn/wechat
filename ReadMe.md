@@ -11,7 +11,7 @@ npm install the dependencies and devDependencies
 ```
 npm install
 ```
-Start
+## Start
 
 start the project
 ```

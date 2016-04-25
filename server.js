@@ -63,7 +63,7 @@ function proxy(data){
 			data.url,
 			{
 				form: data.post,
-				method: data.options.method || "GET"
+				method: data.options && data.options.method || "GET"
 			}, 
 			function(err, res){
 				if(err){

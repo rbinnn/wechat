@@ -16,6 +16,14 @@ export default class LoginBox extends Component{
 		this.props.post(user, pass);
 	}
 
+	componentWillReceiveProps(props) {
+		console.log("abc", props)
+	}
+
+	componentWillUpdate(){
+		console.log("123")
+	}
+
 	render(){
 		return (
 			<form>
