@@ -1,4 +1,4 @@
-import Statue from "../constants/User";
+import { Statue } from "../constants";
 const assign = Object.assign;
 
 export default function statue(state = "LOGOUTED", action){

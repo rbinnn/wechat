@@ -1,6 +1,6 @@
-// import { default as Fetch } from './ajax';
 import { default as Fetch } from 'isomorphic-fetch'
 import { isEmpty, map } from "lodash";
+import parseJSON from "./parseJSON";
 const assign = Object.assign;
 const proxyUrl = "/proxy.do";
 
@@ -39,5 +39,7 @@ export default function fetch(url, data = {}, options = {}){
 				body: JSON.stringify(body)
 			}
 		)
-	).then( res => res.json() );  // json化处理返回的内容
+	)
+	.then( res => res.json() )
+	.then( data => parseJSON(data) )  // json化处理返回的内容
 }

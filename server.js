@@ -6,9 +6,10 @@ var express = require("express")
 var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var port = 3000;
+var port = 5000;
 var compiler = webpack(config);
 var request = require("request");
+var logger = require("./middlewares/server_log");
 
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
@@ -66,6 +67,8 @@ function proxy(data){
 				method: data.options && data.options.method || "GET"
 			}, 
 			function(err, res){
+				// 日志记录，debug的时候可以分析请求与响应
+				logger.log(res);
 				if(err){
 					reject(err);
 				}else{

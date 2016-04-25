@@ -1,31 +1,21 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import UserAction from "../actions/user";
 import LoginBox from "./LoginBox.jsx";
 import MainBox from "./MainBox.jsx";
+import { Statue } from "../constants";
 
 
 class App extends Component{
 	render(){
 		const { 
-			statue, 
-			personInfo, 
-			friendsList, 
-			message, 
-			actions 
+			statue
 		} = this.props;
-		const isLogin = statue !== "LOGOUTED";
-		console.log(statue)
+		const isLogin = statue === Statue.LOGINED;
 		return (
 			<div>
 				{ isLogin ? 
-					<MainBox statue = { statue }/>: 
-					<LoginBox 
-						statue = { statue }
-						login = { actions.login }
-						post = { actions.loginPost }
-					/>  
+					<MainBox />: 
+					<LoginBox />  
 				}
 			</div>
 		);
@@ -33,13 +23,10 @@ class App extends Component{
 }
 
 function mapStateToProps(state){
-	return state;
-}
-
-function mapDispatchToProps(dispatch){
 	return {
-		actions: bindActionCreators(UserAction, dispatch)
-	}
+		statue: state.statue
+	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default connect(mapStateToProps)(App);

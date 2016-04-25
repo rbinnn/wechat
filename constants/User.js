@@ -1,7 +1,0 @@
-const Statue = {
-	LOGINING: "LOGINING",
-	LOGINED: "LOGINED",
-	LOGOUTED: "LOGOUTED",
-	LOGINERROR: "LOGINERROR"
-}
-export default Statue;

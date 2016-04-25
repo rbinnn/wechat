@@ -1,5 +1,5 @@
 import fetch from '../util/fetch';
-import Statue from "../constants/User";
+import { Statue } from "../constants";
 import Api from "../constants/Api";
 
 function logining(){
@@ -8,17 +8,17 @@ function logining(){
 	}
 }
 
-function loginFail(err){
+function loginFail(error){
 	return {
 		type: Statue.LOGINERROR,
-		error: err
+		error
 	}
 }
 
-function loginSuccess(data){
+function loginSuccess(userid){
 	return {
 		type: Statue.LOGINED,
-		data: json
+		userid
 	}
 }
 
@@ -40,17 +40,20 @@ function loginPost(user, pass){
 		})
   		.then(json => {
   			if( json.statue === "success" ){
-	      		dispatch(loginSuccess(json));
+	      		dispatch(loginSuccess(json.userid));
   			}else{
   				dispatch(loginFail(json.error));
   			}
 	    })
-	    .catch(err => dispatch(loginFail(err)));
+	    .catch(err => {
+	    	dispatch(loginFail(err))
+	    });
 	}
 }
 
-const UserAction = {
-	loginPost: loginPost
+
+const UserActions = {
+	loginPost
 }
 
-export default UserAction;
+export default UserActions;
