@@ -1,9 +1,26 @@
+@import "./util.scss";
+
 #friends-bar{
-	margin-top:20px;
-	border-top: 1px solid #292C33;
+	overflow-y: scroll;
+    flex: 1;
 	li{
 		display: flex;
 	    height: 50px;
+        padding: 0px 10px;
 	    border-bottom: 1px solid #292C33;
+	    align-items: center;
+	    cursor: pointer;
+	    img{
+	    	width: 35px;
+	    	height: 35px;
+	    	flex: none;
+	    }
+	    span{
+	    	flex: 1;
+	    	font-size: 14px;
+	    	margin-left: 10px;
+	    	color: #ddd;
+	    	@include text-overflow;
+	    }
 	}
 }

@@ -2,6 +2,7 @@
 	margin: 0px;
 	padding: 0px;
 	border: none;
+	list-style: none;
 	font-family: "Microsoft YaHei";
 }
 html, body{
@@ -27,3 +28,27 @@ html, body{
 	display: flex;
 	width: 60%;
 }
+
+/*---滚动条默认显示样式--*/    
+::-webkit-scrollbar-thumb{
+    background-color: #414141;  
+    -webkit-border-radius:4px;    
+    border-radius: 10px;
+    cursor: pointer;
+}   
+/*---鼠标点击滚动条显示样式--*/    
+::-webkit-scrollbar-thumb:hover{    
+   background-color: #595B60;  
+}    
+   
+/*---滚动条大小--*/    
+::-webkit-scrollbar{    
+   width:6px;    
+}   
+   
+/*---滚动框背景样式--*/    
+::-webkit-scrollbar-track-piece{    
+   background-color:transparent;    
+   -webkit-border-radius:0; 
+   width: 0;  
+}    

@@ -1,4 +1,6 @@
 .friendsBox{
+	display: flex;
+	flex-direction: column;
 	width: 200px;
 	min-height: 500px;
 	height: 500px;

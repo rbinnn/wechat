@@ -28,10 +28,10 @@ app.post("/proxy.do", function(req, res){
 	.resolve(req.body)
 	.then(hasUrl)
 	.then(proxy)
-	.then(function(data){
-		res.json(data);
-	})
-	// .then(res.json.bind(this))
+	// .then(function(data){
+	// 	res.json(data);
+	// })
+	.then(res.json.bind(res))
 	.catch(function(err){
 		// 出错的话封装一个错误json对象返回
 		var errObj = {
