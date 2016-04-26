@@ -9,7 +9,7 @@ var methodOverride = require('method-override');
 var port = 5000;
 var compiler = webpack(config);
 var request = require("request");
-var logger = require("./middlewares/server_log");
+var logger = require("./utils/server_log");
 var cookies; // cookie，代理跨域不会自动发送cookie
 
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));

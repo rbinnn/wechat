@@ -1,4 +1,4 @@
-import fetch from '../util/fetch';
+import fetch from '../utils/fetch';
 import { Friend } from "../constants";
 import Api from "../constants/Api";
 

@@ -1,0 +1,29 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	font-family: "Microsoft YaHei";
+}
+html, body{
+	height: 100%;
+}
+#container{
+	height: 100%;
+	background: url("/images/web_wechat_bg.jpg") no-repeat center;
+	background-size: cover;
+}
+.main{
+	height: 100%;
+	display: flex;
+	align-items: center; 
+	justify-content: center;
+}
+
+.row{
+	display: flex;
+}
+
+.mainBox{
+	display: flex;
+	width: 60%;
+}

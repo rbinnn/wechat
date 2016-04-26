@@ -1,0 +1,67 @@
+@import "./util.scss";
+
+.show{
+	display: block;
+}
+.hide{
+	display: none;
+}
+
+.list{
+	li{
+		list-style: none;
+	}
+}
+#user-bar{
+	margin: 10px;
+	justify-content: space-between;
+	img{
+		flex: none;
+		width: 40px;
+		height: 40px;
+	}
+	.btn{
+		flex: none;
+	    position: relative;
+		line-height: 40px;
+	    height: 40px;
+	    font-size: 20px;
+	    color: #7F7F7F;
+	    font-weight: 800;
+	    cursor: pointer;
+	}
+	.list{
+		position: absolute;
+    	top: 45px;
+   		right: 0px;
+   		background-color:#fff;
+   		border-radius: 4px;
+		li{
+			padding: 0px 10px;
+		    list-style: none;
+		    font-size: 14px;
+		    height: 32px;
+		    width: 100px;
+		    display: block;
+		    text-align: left;
+		    line-height: 32px;
+		    border-bottom: 1px solid #B7B7B7;
+		    color: black;
+		    font-weight: 100;
+		}
+		li:last-of-type{
+			border-bottom: none;
+		}
+	}
+}
+#name-txt{
+	display: inline-block;
+	width: 200px;
+	max-width: 200px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	color: #fff;
+	margin-left: 5px;
+	@include text-overflow;
+}

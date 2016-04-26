@@ -1,4 +1,4 @@
-import fetch from '../util/fetch';
+import fetch from '../utils/fetch';
 import { Info } from "../constants";
 import Api from "../constants/Api";
 
@@ -17,7 +17,7 @@ function getInfo(userid){
   			}
 	    })
 	    .catch(err => {
-	    	dispatch(getInfoError(err))
+	    	dispatch(getInfoError(err));
 	    });
 	}
 }

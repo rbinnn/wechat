@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { loginAction } from "../actions";
 import { Statue } from "../constants";
+import "../sources/sass/login.scss";
 
 class LoginBox extends Component{
 	constructor(...props){
@@ -17,7 +18,6 @@ class LoginBox extends Component{
 		if( !user || !pass ){
 			return;
 		}
-		console.log(this.props.actions)
 		this.props.actions.loginPost(user, pass);
 	}
 
@@ -29,16 +29,14 @@ class LoginBox extends Component{
 
 	render(){
 		return (
-			<form>
-				<div>
-					<label for = "username">username</label>
-					<input type = "text" id = "username" ref = "username"/>
+			<form className = "row loginBox">
+				<div className = "item">
+					<input type = "text" id = "username" ref = "username" placeholder = "your name ..."/>
 				</div>
-				<div>
-					<label for = "password">password</label>
-					<input type = "password" id = "password" ref = "password"/>
+				<div className = "item">
+					<input type = "password" id = "password" ref = "password" placeholder = "your password ..."/>
 				</div>
-				<div>
+				<div className = "item">
 					<button type = "button" onClick = { this.login }>登录</button>
 				</div>
 			</form>

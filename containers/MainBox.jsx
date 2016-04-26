@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { loginAction, commonAction, friendAction } from "../actions";
 import { Statue } from "../constants";
+import FriendsBox from "../components/FriendsBox.jsx";
+import InfoBox from "../components/InfoBox.jsx";
+import MessageBox from "../components/MessageBox.jsx";
 const assign = Object.assign;
 
 class MainBox extends Component{
@@ -20,7 +23,10 @@ class MainBox extends Component{
 
 	render(){
 		return (
-			<div></div>
+			<div className = "mainBox">
+				<FriendsBox />
+				<MessageBox />
+			</div>
 		)
 	}
 
