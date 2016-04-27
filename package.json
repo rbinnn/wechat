@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "lodash": "^4.11.1",
+    "rc-dialog": "^6.0.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",

@@ -4,6 +4,8 @@ import LoginBox from "./LoginBox.jsx";
 import MainBox from "./MainBox.jsx";
 import { Statue } from "../constants";
 import "../sources/sass/common.scss";
+import 'rc-dialog/assets/index.css';
+import "../components/Modal.jsx";
 
 
 class App extends Component{
@@ -13,7 +15,7 @@ class App extends Component{
 		} = this.props;
 		const isLogin = statue !== Statue.LOGINED;
 		return (
-			<div className = "main">
+			<div className = "main" onClick = { this.onclick }>
 				{ isLogin ? 
 					<MainBox />: 
 					<LoginBox />  

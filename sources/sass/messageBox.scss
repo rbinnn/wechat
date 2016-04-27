@@ -15,6 +15,28 @@
 		font-size: 16px;
 		@include text-overflow;	
 	}
+	/*---滚动条默认显示样式--*/    
+	::-webkit-scrollbar-thumb{
+	    background-color: #CECECE;  
+	    -webkit-border-radius:4px;    
+	    border-radius: 4px;
+	}   
+	/*---鼠标点击滚动条显示样式--*/    
+	::-webkit-scrollbar-thumb:hover{    
+	   background-color: #7A7A7A;  
+	}    
+	   
+	/*---滚动条大小--*/    
+	::-webkit-scrollbar{    
+	   width:8px;    
+	}   
+	   
+	/*---滚动框背景样式--*/    
+	::-webkit-scrollbar-track-piece{    
+	   background-color:transparent;    
+	   -webkit-border-radius:0; 
+	   width: 0;  
+	}    
 }
 #chat-input{
 	flex: none;
@@ -38,7 +60,12 @@
 		:focus{
 			outline: none;
 		}
+		
 	}
+	/*---滚动条大小--*/    
+	::-webkit-scrollbar{    
+	   width:4px;    
+	}   
 	button{
 		flex: none;
 		width: 80px;
@@ -54,28 +81,7 @@
 			outline: none;
 		}
 	}
-	/*---滚动条默认显示样式--*/    
-	::-webkit-scrollbar-thumb{
-	    background-color: #CECECE;  
-	    -webkit-border-radius:4px;    
-	    border-radius: 4px;
-	}   
-	/*---鼠标点击滚动条显示样式--*/    
-	::-webkit-scrollbar-thumb:hover{    
-	   background-color: #7A7A7A;  
-	}    
-	   
-	/*---滚动条大小--*/    
-	::-webkit-scrollbar{    
-	   width:4px;    
-	}   
-	   
-	/*---滚动框背景样式--*/    
-	::-webkit-scrollbar-track-piece{    
-	   background-color:transparent;    
-	   -webkit-border-radius:0; 
-	   width: 0;  
-	}    
+	
 
 }
 #chat-window{
