@@ -3,6 +3,7 @@
 	flex: 1;
 	background-color: white;
 	display: flex;
+    height: 500px;
 	flex-direction: column;
 	.title{
 	    flex: none;
@@ -78,6 +79,49 @@
 
 }
 #chat-window{
-	flex: 1;
+	// flex: 1;
+	height: 400px;
 	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	.item{
+		width: 80%;
+		display: flex;
+		flex: none;
+		img{
+			flex: none;
+			width: 30px;
+			height: 30px;
+			margin: 10px;
+		}
+		p{
+			margin: 10px 0px;
+			flex: 1;
+			white-space: pre-wrap;
+    		word-break: break-all;
+    		background-color: #b2e281;
+    		border-radius: 4px;
+    		font-size: 14px;
+    		padding: 6px;
+		}
+	}
+	.m-left{
+		align-self: flex-start;
+		img{
+			order: 0;
+		}
+		p{
+			order: 1;
+		}
+	}
+	.m-right{
+		align-self: flex-end;
+		img{
+			order: 1;
+		}
+		p{
+			order: 0;
+		}
+	}
+
 }

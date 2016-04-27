@@ -12,6 +12,23 @@ export default class FriendsBox extends Component{
 				<Menu />
 				<ul id = "friends-bar">
 					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
+					<FriendCard />
 				</ul>
 			</div>
 		)
