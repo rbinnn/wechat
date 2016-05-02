@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from "react";
 import _ from "lodash";
 
 export default class UserInfoModal extends Component{
-	
+
 	componentWillReceiveProps(nextProps) {
 		/* 
 			判断来自上级组件的props的showSave，
@@ -20,7 +20,6 @@ export default class UserInfoModal extends Component{
 	 		let oldPersonInfo = this.props.personInfo;
 	 		// 判断有没有修改过，没有修改就不通知父级提交数据了
 	 		let dataChanged = _.some(newPersonInfo, function(val, key){
-	 			console.log(key, val)
 	 			if( key in oldPersonInfo && oldPersonInfo[key] === val){
 	 				return false;
 	 			}
@@ -35,6 +34,7 @@ export default class UserInfoModal extends Component{
 	 		this.props.updateInfo( dataChanged ? newPersonInfo : null );	 		
 	 	}     
 	}
+	
 	render(){
 		const { personInfo } = this.props;
 		return (

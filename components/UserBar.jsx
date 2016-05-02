@@ -36,6 +36,7 @@ export default class UserBar extends Component{
 		// 有数据的话就调用接口提交新的个人信息
 		if( data !== null){
 			console.log("update the info : ", data);
+			this.props.updateInfoAction(data);
 		}
 	}
 

@@ -75,8 +75,9 @@ function proxy(data){
 				// 记录cookie
 				cookies = res.headers["set-cookie"] || cookies;
 				// 日志记录，debug的时候可以分析请求与响应
+				logger.log("res.headers['set-cookie']::::: ",res.headers["set-cookie"]);
+				logger.log("cookie::::: ", cookies);
 				logger.log(res);
-				logger.log(res.headers["set-cookie"]);
 				if(err){
 					reject(err);
 				}else{
