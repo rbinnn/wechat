@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import Dialog from "rc-dialog";
 
-export default FriendInfoModal extends Component{
+export default class FriendInfoModal extends Component{
 	render(){
 		return (
 			<Dialog visible = { this.props.visible} title = "好友资料">

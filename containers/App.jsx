@@ -5,8 +5,8 @@ import MainBox from "./MainBox.jsx";
 import { Statue } from "../constants";
 import "../sources/sass/common.scss";
 import 'rc-dialog/assets/index.css';
-import "../components/Modal.jsx";
-
+// import UserInfoModal from "../components/UserInfoModal.jsx";
+import FriendInfoModal from "../components/FriendInfoModal.jsx";
 
 class App extends Component{
 	render(){
@@ -15,12 +15,13 @@ class App extends Component{
 		} = this.props;
 		const isLogin = statue !== Statue.LOGINED;
 		return (
-			<div className = "main" onClick = { this.onclick }>
-				{ isLogin ? 
-					<MainBox />: 
-					<LoginBox />  
-				}
-			</div>
+			// <div className = "main" onClick = { this.onclick }>
+			// 	{ isLogin ? 
+			// 		<MainBox />: 
+			// 		<LoginBox />  
+			// 	}
+			// </div>
+			<FriendInfoModal visible = {true}/>
 		);
 	}
 }
