@@ -22,9 +22,13 @@ class MainBox extends Component{
 	}
 
 	render(){
+		const { friendsList, personInfo } = this.props;
 		return (
 			<div className = "mainBox">
-				<FriendsBox />
+				<FriendsBox 
+					friendsList = { friendsList }
+					personInfo = { personInfo }
+				/>
 				<MessageBox />
 			</div>
 		)

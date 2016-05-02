@@ -11,19 +11,36 @@ import "../sources/sass/modal.scss";
 
 const width = 380;
 
-const footer = [
-	<button key = "cancel" className = "cancel-btn">cancel</button>,
-	<button key = "save" className = "save-btn">save</button>
-];
 
 export default class Modal extends Component{
+	constructor(){
+		super();
+		this.close = this.close.bind(this);
+		this.save = this.save.bind(this);
+	}
+
+	// 关闭模态框
+	close(){
+		this.props.close();
+	}
+
+	// 保存
+	save(){
+		this.props.showSaveFn();
+	}
+	
 	render(){
+		const footer = [
+			<button key = "cancel" className = "cancel-btn" onClick = { this.close }>cancel</button>,
+			<button key = "save" className = "save-btn" onClick = { this.save }>save</button>
+		];
 		return (
 			<Dialog 
 				visible = { this.props.visible } 
 				footer = { footer } 
 				width = { width } 
 				title = { this.props.title }
+				onClose = { this.close }
 			>
 				{ this.props.children }
 			</Dialog>

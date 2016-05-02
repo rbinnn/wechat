@@ -4,33 +4,25 @@ import FriendCard from "./FriendCard.jsx";
 import Menu from "./Menu.jsx";
 import "../sources/sass/friendsBox.scss";
 
+var uid = 0;
+function createKey(){
+	return `wechat_${uid++}`;
+}
+
 export default class FriendsBox extends Component{
 	render(){
 		return(
 			<div className = "friendsBox">
-				<UserBar />
+				<UserBar personInfo = { this.props.personInfo }/>
 				<Menu />
 				<ul id = "friends-bar">
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
-					<FriendCard />
+					{ 
+						this.props.friendsList.map( item => {
+							return <FriendCard remark = { item.remark } userid = { item.userid } key = { createKey() } />
+						})
+					}
 				</ul>
 			</div>
-		)
+		);
 	}
 }

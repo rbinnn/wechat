@@ -4,9 +4,9 @@ import "../sources/sass/friendCard.scss";
 export default class FriendCard extends Component{
 	render(){
 		return (
-			<li>
+			<li userid = { this.props.userid }>
 				<img src="/images/webwxgeticon_0.jpg" alt=""/>
-				<span>胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖胖</span>
+				<span>{ this.props.remark }</span>
 			</li>
 		);
 	}
