@@ -22,7 +22,9 @@ export default class FriendsBox extends Component{
 		}
 	}
 
-	showFriendInfoModal(){
+	showFriendInfoModal(e){
+		console.log(e, e.currentTarget, e.target)
+		console.log("hello, ",e.relatedTarget)
 		this.setState({
 			modalVisible: true
 		});
@@ -49,12 +51,12 @@ export default class FriendsBox extends Component{
 				<Menu />
 				<ul id = "friends-bar">
 					{ 
-						this.props.friendsList.map( item => {
+						this.props.friends.map( item => {
 							return <FriendCard 
 								remark = { item.remark } 
 								userid = { item.userid } 
 								key = { createKey() } 
-								onDoubleClick = { this.showFriendInfoModal }
+								showFriendInfoModal = { this.showFriendInfoModal }
 							/>
 						})
 					}
@@ -65,8 +67,7 @@ export default class FriendsBox extends Component{
 					close = { this.hideFriendInfoModal }
 					showSaveFn = { this.showSaveFn }
 				>
-					<FriendInfoModal 
-
+					<FriendInfoModal
 					/>
 				</Modal>
 			</div>

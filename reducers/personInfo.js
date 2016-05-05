@@ -1,15 +1,15 @@
-import { Statue, Info } from "../constants";
+import { Statue, PersonInfo } from "../constants";
 const assign = Object.assign;
 
 export default function personInfo(state = {}, action){
 	switch(action.type){
 		case Statue.LOGINED:
 			return assign({}, state, { userid: action.userid });
-		case Info.GETINFO:
+		case PersonInfo.GETINFO:
 			return assign({}, state, action.data);
-		case Info.UPDATEINFO:
+		case PersonInfo.UPDATEINFO:
 			return assign({}, state, action.data);
-		case Info.UPDATEINFOERROR:
+		case PersonInfo.UPDATEINFOERROR:
 			return assign({}, state, action.data);
 	}
 	return state;

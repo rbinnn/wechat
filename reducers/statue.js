@@ -9,6 +9,8 @@ export default function statue(state = "LOGOUTED", action){
 			return Statue.LOGINED;
 		case Statue.LOGOUTED:
 			return Statue.LOGOUTED;
+		case Statue.LOGINERROR:
+			return Statue.LOGINERROR;
 		default:
 			return state;
 	}
