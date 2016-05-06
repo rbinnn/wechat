@@ -54,7 +54,26 @@ function getFriendInfo(userid){
 	}
 }
 
-function getInfoSuccess(userid,data){
+function setCurrentFriendId(id){
+	return {
+		type: Friend.CURRENTFRIENDMODAL,
+		id
+	}
+}
+
+function openFriendInfoModal(){
+	return {
+		type: Friend.OPENFRIENDMODAL
+	}
+}
+
+function closeFriendInfoModal(){
+	return {
+		type: Friend.CLOSEFRIENDMODAL
+	}
+}
+
+function getInfoSuccess(userid, data){
 	return {
 		type: Friend.GETINFO,
 		userid,
@@ -69,23 +88,18 @@ function getInfoError(error){
 	}
 }
 
-function updateRemark(data){
+function updateRemark(userid, remark){
 	return (dispatch, getState) => {
 		return fetch(
-			Api.updateInfo, 
-			{
-				nickname: data.nickName, 
-				// 后台接收的字段跟之前的不一致，要手动改正
-				age: data.age,
-				sex: data.sex,
-				email: data.email,
-				introduction: data.introduction
+			Api.setRemark,{
+				userid,
+				remark
 			}, {
 				method: "POST"
 			})
 			.then(json => {
 				if( json.statue && json.statue === "success" ){
-					dispatch(updateRemarkSuccess(data));
+					dispatch(updateRemarkSuccess(userid, remark));
 				}else{
 					dispatch(updateRemarkFail(json.error));
 				}
@@ -96,10 +110,11 @@ function updateRemark(data){
 	}
 }
 
-function updateRemarkSuccess(data){
+function updateRemarkSuccess(userid, remark){
 	return {
 		type: Friend.UPDATEREMARK,
-		data
+		userid,
+		data: {remark}
 	}
 }
 
@@ -113,6 +128,9 @@ function updateRemarkFail(error){
 const friend = {
 	getFriendsList,
 	getFriendInfo,
+	setCurrentFriendId,
+	openFriendInfoModal,
+	closeFriendInfoModal,
 	updateRemark
 };
 

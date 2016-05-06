@@ -16,20 +16,21 @@ class MainBox extends Component{
 
 	getInfo(){
 		const { actions, personInfo } = this.props; 
-		actions.checkIsLogin();
+		// actions.checkIsLogin();
 		actions.getPersonInfo(personInfo.userid);
-		actions.getFriendsList();
+		setTimeout(()=>{
+			actions.getFriendsList();
+		},200)
 	}
 
 	render(){
 		const { friends, personInfo, actions } = this.props;
-		const { updatePersonInfo } = actions;
 		return (
 			<div className = "mainBox">
 				<FriendsBox 
 					friends = { friends }
+					actions = { actions }
 					personInfo = { personInfo }
-					updateInfoAction = { updatePersonInfo }
 				/>
 				<MessageBox />
 			</div>
