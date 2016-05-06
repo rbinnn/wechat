@@ -39,7 +39,7 @@ export default class FriendsBox extends Component{
 	}
 
 	render(){
-		const { friends, actions } = this.props;
+		const { friends, actions, menu } = this.props;
 		const { list, modalVisible, currentFriendId } = friends;
 		const friendInfo = 	
 			currentFriendId ? 
@@ -50,7 +50,11 @@ export default class FriendsBox extends Component{
 			<div className = "friendsBox">
 				<UserBar 
 					personInfo = { this.props.personInfo }
-					updateInfoAction = { this.props.updateInfoAction }
+					updateInfoAction = {actions.updateInfo }
+					showMenu = { actions.showMenu }
+					hideMenu = { actions.hideMenu }
+					menuState = { menu }
+
 				/>
 				<Menu />
 				<ul id = "friends-bar">

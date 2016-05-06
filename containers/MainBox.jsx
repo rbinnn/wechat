@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { loginAction, commonAction, friendAction, personInfoAction, logoutAction } from "../actions";
+import { 	
+		loginAction, 
+		commonAction, 
+		friendAction, 
+		personInfoAction, 
+		logoutAction,
+		menuAction
+	} from "../actions";
 import { Statue } from "../constants";
 import FriendsBox from "../components/FriendsBox.jsx";
 import InfoBox from "../components/InfoBox.jsx";
@@ -18,19 +25,20 @@ class MainBox extends Component{
 		const { actions, personInfo } = this.props; 
 		// actions.checkIsLogin();
 		actions.getPersonInfo(personInfo.userid);
-		setTimeout(()=>{
-			actions.getFriendsList();
-		},200)
+		actions.getFriendsList();
 	}
 
+	
+
 	render(){
-		const { friends, personInfo, actions } = this.props;
+		const { friends, personInfo, actions, menu } = this.props;
 		return (
 			<div className = "mainBox">
 				<FriendsBox 
 					friends = { friends }
 					actions = { actions }
 					personInfo = { personInfo }
+					menu = { menu }
 				/>
 				<MessageBox />
 			</div>
@@ -49,7 +57,7 @@ function mapDispatchToProps(dispatch){
 	return {		
 		actions: 
 			bindActionCreators(
-				assign({}, loginAction, personInfoAction, friendAction, logoutAction), 
+				assign({}, loginAction, personInfoAction, friendAction, logoutAction, menuAction), 
 				dispatch
 			)
 	}

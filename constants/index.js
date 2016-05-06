@@ -14,6 +14,12 @@ const PersonInfo = {
 	UPDATEINFOERROR: "UPDATEPERSONINFOERROR"
 }
 
+// 菜单显示状态
+const Menu = {
+	SHOW: "MENUSHOW",
+	HIDE: "MENUHIDE"
+}
+
 // 好友相关的状态
 const Friend = {
 	GETINFO: "GETFRIENDINFO",
@@ -28,4 +34,4 @@ const Friend = {
 }
 
 
-export { Statue, PersonInfo, Friend };
+export { Statue, PersonInfo, Menu, Friend };

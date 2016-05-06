@@ -3,6 +3,7 @@ import "../sources/sass/userBar.scss";
 import "../sources/css/iconfont.css";
 import Modal from "./Modal.jsx";
 import UserInfoModal from "./UserInfoModal.jsx";
+import { Menu } from "../constants"
 const assign = Object.assign;
 
 export default class UserBar extends Component{
@@ -13,6 +14,7 @@ export default class UserBar extends Component{
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.showSaveFn = this.showSaveFn.bind(this);
 		this.updateInfo = this.updateInfo.bind(this);
+		this.toggleMenuGlobal = this.toggleMenuGlobal.bind(this);
 
 		this.state = {
 			modalVisible: false,
@@ -40,11 +42,29 @@ export default class UserBar extends Component{
 		}
 	}
 
+	componentDidMount(){
+		// 全局点击
+		document.addEventListener("click", this.toggleMenuGlobal, false)
+	}
+
+	toggleMenuGlobal(e){
+		if( e.target === this.refs.menuBtn ){
+			this.toggleMenu(false);
+		}else{
+			this.toggleMenu(true);
+		}
+	}
+
 	// 切换菜单显示或者隐藏
-	toggleMenu(){		
-		this.setState({
-			menuVisible: !this.state.menuVisible
-		});
+	toggleMenu(isGlobal){
+		const { menuState, showMenu, hideMenu } = this.props;
+		if( menuState ){
+			hideMenu();
+			return;
+		}
+		if( !isGlobal ){
+			showMenu();
+		}		
 	}
 
 	// 展示个人信息模态窗
@@ -64,14 +84,14 @@ export default class UserBar extends Component{
 	}
 
 	render(){
-		const { personInfo } = this.props;
-		const { modalVisible, menuVisible, showSave } = this.state;
+		const { personInfo, menuState } = this.props;
+		const { modalVisible, showSave } = this.state;
 		return (
 			<div className = "row" id = "user-bar">
 				<img src = "/images/avatar.jpg" />
 				<span id = "name-txt">{ personInfo.nickName }</span>
-				<div className="iconfont icon-xiala btn" onClick = { this.toggleMenu }>
-					<ul className = {`list ${ menuVisible ? "show" : "hide" }`}>
+				<div className="iconfont icon-xiala btn" ref= "menuBtn">
+					<ul className = {`list ${ menuState ? "show" : "hide" }`}>
 						<li onClick = { this.showUserInfoModal }>个人信息</li>
 						<li>退出</li>
 					</ul>
