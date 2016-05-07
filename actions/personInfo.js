@@ -78,9 +78,23 @@ function updateInfoFail(error){
 	}
 }
 
+function showPersonInfoModal(){
+	return {
+		type: PersonInfo.OPENPERSONINFOMODAL
+	}
+}
+
+function hidePersonInfoModal(){
+	return {
+		type: PersonInfo.CLOSEPERSONINFOMODAL
+	}
+}
+
 const personInfo = {
 	getPersonInfo,
-	updatePersonInfo
+	updatePersonInfo,
+	showPersonInfoModal,
+	hidePersonInfoModal
 }
 
 export default personInfo;

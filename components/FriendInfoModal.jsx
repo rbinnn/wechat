@@ -21,6 +21,7 @@ export default class FriendInfoModal extends Component{
 	 		const userid = this.props.currentFriendId;
 	 		// 没有改变就直接return掉了
 	 		if( this.props.friendInfo.remark === remark ){
+	 			this.props.updateRemark(null);
 	 			return ;
 	 		}
 	 		this.props.updateRemark(userid, remark);	 		

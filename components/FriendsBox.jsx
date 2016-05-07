@@ -35,7 +35,9 @@ export default class FriendsBox extends Component{
 		this.setState({
 			showSave: false
 		});
-		updateRemark(userid, remark);
+		if( userid !== null ){
+			updateRemark(userid, remark);
+		}
 	}
 
 	render(){
@@ -50,11 +52,12 @@ export default class FriendsBox extends Component{
 			<div className = "friendsBox">
 				<UserBar 
 					personInfo = { this.props.personInfo }
-					updateInfoAction = {actions.updateInfo }
+					updatePersonInfoAction = { actions.updatePersonInfo }
+					showPersonInfoModalAction = { actions.showPersonInfoModal }
+					hidePersonInfoModalAction = { actions.hidePersonInfoModal }
 					showMenu = { actions.showMenu }
 					hideMenu = { actions.hideMenu }
 					menuState = { menu }
-
 				/>
 				<Menu />
 				<ul id = "friends-bar">

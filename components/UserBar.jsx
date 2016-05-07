@@ -11,22 +11,18 @@ export default class UserBar extends Component{
 		super();
 		this.showUserInfoModal = this.showUserInfoModal.bind(this);
 		this.hideUserInfoModal = this.hideUserInfoModal.bind(this);
-		this.toggleMenu = this.toggleMenu.bind(this);
 		this.showSaveFn = this.showSaveFn.bind(this);
 		this.updateInfo = this.updateInfo.bind(this);
+		this.toggleMenu = this.toggleMenu.bind(this);
 		this.toggleMenuGlobal = this.toggleMenuGlobal.bind(this);
-
 		this.state = {
-			modalVisible: false,
-			menuVisible: false,
 			showSave: false
 		}
 	}
 	
 	showSaveFn(){
 		this.setState({
-			showSave: true,
-			modalVisible: false
+			showSave: true
 		});
 	}
 
@@ -35,10 +31,11 @@ export default class UserBar extends Component{
 		this.setState({
 			showSave: false
 		});
+		this.props.hidePersonInfoModalAction();
 		// 有数据的话就调用接口提交新的个人信息
-		if( data !== null){
+		if( data !== null ){
 			console.log("update the info : ", data);
-			this.props.updateInfoAction(data);
+			this.props.updatePersonInfoAction(data);
 		}
 	}
 
@@ -68,24 +65,18 @@ export default class UserBar extends Component{
 	}
 
 	// 展示个人信息模态窗
-	showUserInfoModal(e){
-		e.stopPropagation();	
-		this.setState({
-			modalVisible: true,
-			menuVisible: false
-		});
+	showUserInfoModal(){
+		this.props.showPersonInfoModalAction();		
 	}
 
 	// 关闭个人信息模态窗
 	hideUserInfoModal(){
-		this.setState({
-			modalVisible: false
-		});
+		this.props.hidePersonInfoModalAction();
 	}
 
 	render(){
 		const { personInfo, menuState } = this.props;
-		const { modalVisible, showSave } = this.state;
+		const { showSave } = this.state;
 		return (
 			<div className = "row" id = "user-bar">
 				<img src = "/images/avatar.jpg" />
@@ -97,7 +88,7 @@ export default class UserBar extends Component{
 					</ul>
 				</div>
 				<Modal 
-					visible = { modalVisible }
+					visible = { personInfo.modalVisible }
 					title = "个人信息"
 					close = { this.hideUserInfoModal }
 					showSaveFn = { this.showSaveFn }
