@@ -47,4 +47,4 @@ const Message = {
 }
 
 
-export { Statue, PersonInfo, Menu, Friend };
+export { Statue, PersonInfo, Menu, Friend, Message };

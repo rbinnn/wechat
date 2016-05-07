@@ -3,6 +3,7 @@ import login from "./login";
 import logout from "./logout";
 import menu from "./menu";
 import personInfo from "./personInfo";
+import message from "./message";
 
 export {
 	menu as menuAction,

@@ -125,7 +125,7 @@ function _getUnreadById(userid, dispatch){
 		});
 	})
 	.catch(err => {
-		return new Promise((resolve, reject){
+		return new Promise((resolve, reject) => {
 			reject(err);
 		});
 	});
@@ -163,9 +163,9 @@ function getRecentPost(userid, number = 20){
 				dispatch(getRecent(userid, json));
 			}
 		})
-		.catch(err){
+		.catch(err => {
 			dispatch(getRecentFail(err));
-		}
+		});
 	}
 }
 
