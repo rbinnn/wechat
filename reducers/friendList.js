@@ -1,1 +1,0 @@
-friendList.js

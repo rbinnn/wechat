@@ -36,14 +36,14 @@ function loginPost(user, pass){
 			method: "POST"
 		})
   		.then(json => {
-  			if( json.statue === "success" ){
+  			if( json.statue && json.statue === "success" ){
 	      		dispatch(loginSuccess(json.userid));
   			}else{
   				dispatch(loginFail(json.error));
   			}
 	    })
 	    .catch(err => {
-	    	dispatch(loginFail(err))
+	    	dispatch(loginFail(err));
 	    });
 	}
 }

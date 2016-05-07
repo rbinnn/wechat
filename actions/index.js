@@ -9,5 +9,6 @@ export {
 	friend as friendAction,
 	login as loginAction,
 	logout as logoutAction,
-	personInfo as personInfoAction
+	personInfo as personInfoAction,
+	message as messageAction
 }
