@@ -3,55 +3,6 @@ import { Message } from "../constants";
 import _ from 'lodash';
 import Api from "../constants/Api";
 
-// 发送消息Action
-function sendTo(id, list){
-	return {
-		type: Message.SENDTO,
-		id,
-		list
-	}
-}
-
-function sendToFail(error){
-	return {
-		type: Message.SENDTOERROR,
-		error
-	}
-}
-
-// 获得未读消息
-function getUnread(id, list){
-	return {
-		type: Message.GETUNREAD,
-		id,
-		list
-	}
-}
-
-// 未读消息已读
-function readUnread(id){
-	return {
-		type: Message.READUNREAD,
-		id
-	}
-}
-
-// 获得最近消息
-function getRecent(id, list){
-	return {
-		type: Message.GETRECENT,
-		id,
-		list
-	}
-}
-
-function getRecentFail(error){
-	return {
-		type: Message.GETRECENTERROR,
-		error
-	}
-}
-
 // 异步发送消息
 function sendToPost(userid, content){
 	return (dispatch, getState) => {
@@ -68,19 +19,42 @@ function sendToPost(userid, content){
 					time: Date.now(),
 					content
 				}];
-	      		dispatch(sendTo(userid, list));
+	      		dispatch(_sendToSuccess(userid, list));
   			}else{
-  				dispatch(sendToFail(json.error));
+  				dispatch(_sendToFail(json.error));
   			}
 		})
 		.catch( err => {
-			dispatch(sendToFail(err));
+			dispatch(_sendToFail(err));
 		})
 		
 	}	
 }
 
-// 获得未读消息
+function _sendToSuccess(id, list){
+	return {
+		type: Message.SENDTO,
+		id,
+		list
+	}
+}
+
+function _sendToFail(error){
+	return {
+		type: Message.SENDTOERROR,
+		error
+	}
+}
+
+// 未读消息已读，普通action
+function readUnread(id){
+	return {
+		type: Message.READUNREAD,
+		id
+	}
+}
+
+// 获得未读消息, 异步action
 function getUnreadPost(){
 	return (dispatch, getState) => {
 		return _getHasUnread()
@@ -120,7 +94,7 @@ function _getUnreadById(userid, dispatch){
 				reject(json.error);
 				return;
 			}
-			dispatch(getUnread(userid, json));
+			dispatch(_getUnread(userid, json));
 			resolve(json);			
 		});
 	})
@@ -145,7 +119,15 @@ function _getHasUnread(){
 	});
 }
 
-// 发送异步请求获得最近消息
+function _getUnread(id, list){
+	return {
+		type: Message.GETUNREAD,
+		id,
+		list
+	}
+}
+
+// 获得最近消息,异步action
 function getRecentPost(userid, number = 20){
 	return (dispatch, getState) => {
 		return fetch(
@@ -158,15 +140,30 @@ function getRecentPost(userid, number = 20){
 		)
 		.then( json => {
 			if( json.statue && json.statue === "error" ){
-				dispatch(getRecentFail(json.error));
+				dispatch(_getRecentFail(json.error));
 			}else{
 				json = json.reverse();
-				dispatch(getRecent(userid, json));
+				dispatch(_getRecentSuccess(userid, json));
 			}
 		})
 		.catch(err => {
-			dispatch(getRecentFail(err));
+			dispatch(_getRecentFail(err));
 		});
+	}
+}
+
+function _getRecentSuccess(id, list){
+	return {
+		type: Message.GETRECENT,
+		id,
+		list
+	}
+}
+
+function _getRecentFail(error){
+	return {
+		type: Message.GETRECENTERROR,
+		error
 	}
 }
 

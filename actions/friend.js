@@ -2,37 +2,38 @@ import fetch from '../utils/fetch';
 import { Friend } from "../constants";
 import Api from "../constants/Api";
 
-function getFriendsListSuccess(list){
+// 获取好友列表，异步action
+function getFriendsList(){
+	return (dispatch, getState) => {
+		return fetch(Api.getFriends)
+  		.then(json => {
+  			if( json.statue && json.statue === "error" ){  				
+  				dispatch(_getFriendsListError(json.error));
+  			}else{
+	      		dispatch(_getFriendsListSuccess(json));
+  			}
+	    })
+	    .catch(err => {
+	    	dispatch(_getFriendsListError(err))
+	    });
+	}	
+}
+
+function _getFriendsListSuccess(list){
 	return {
 		type: Friend.GETFRIENDS,
 		list
 	}
 }
 
-function getFriendsListError(error){
+function _getFriendsListError(error){
 	return {
 		type: Friend.GETFRIENDSERROR,
 		error
 	}
 }
 
-function getFriendsList(){
-	return (dispatch, getState) => {
-		return fetch(Api.getFriends)
-  		.then(json => {
-  			if( json.statue && json.statue === "error" ){  				
-  				dispatch(getFriendsListError(json.error));
-  			}else{
-	      		dispatch(getFriendsListSuccess(json));
-  			}
-	    })
-	    .catch(err => {
-	    	dispatch(getFriendsListError(err))
-	    });
-	}	
-}
-
-
+// 获取某个好友的信息，异步action
 function getFriendInfo(userid){
 	return (dispatch, getState) => {
 		return fetch(
@@ -43,37 +44,18 @@ function getFriendInfo(userid){
 			})
 	  		.then(json => {
 	  			if( json.statue && json.statue === "error" ){
-	  				dispatch(getInfoError(json.error));
+	  				dispatch(_getInfoError(json.error));
 	  			}else{
-		      		dispatch(getInfoSuccess(userid, json));
+		      		dispatch(_getInfoSuccess(userid, json));
 	  			}
 		    })
 		    .catch(err => {
-		    	dispatch(getInfoError(err));
+		    	dispatch(_getInfoError(err));
 		    });
 	}
 }
 
-function setCurrentFriendId(id){
-	return {
-		type: Friend.CURRENTFRIENDMODAL,
-		id
-	}
-}
-
-function openFriendInfoModal(){
-	return {
-		type: Friend.OPENFRIENDMODAL
-	}
-}
-
-function closeFriendInfoModal(){
-	return {
-		type: Friend.CLOSEFRIENDMODAL
-	}
-}
-
-function getInfoSuccess(userid, data){
+function _getInfoSuccess(userid, data){
 	return {
 		type: Friend.GETINFO,
 		userid,
@@ -81,13 +63,35 @@ function getInfoSuccess(userid, data){
 	}
 }
 
-function getInfoError(error){
+function _getInfoError(error){
 	return　{
 		type: Friend.GETINFOERROR,
 		error
 	}
 }
 
+// 设置当前与哪个好友聊天，普通action
+function setCurrentFriendId(id){
+	return {
+		type: Friend.CURRENTFRIENDMODAL,
+		id
+	}
+}
+
+// 打开好友信息框，普通action
+function openFriendInfoModal(){
+	return {
+		type: Friend.OPENFRIENDMODAL
+	}
+}
+// 关闭好友信息框，普通action
+function closeFriendInfoModal(){
+	return {
+		type: Friend.CLOSEFRIENDMODAL
+	}
+}
+
+// 更新好友备注，异步action
 function updateRemark(userid, remark){
 	return (dispatch, getState) => {
 		return fetch(
@@ -99,18 +103,18 @@ function updateRemark(userid, remark){
 			})
 			.then(json => {
 				if( json.statue && json.statue === "success" ){
-					dispatch(updateRemarkSuccess(userid, remark));
+					dispatch(_updateRemarkSuccess(userid, remark));
 				}else{
-					dispatch(updateRemarkFail(json.error));
+					dispatch(_updateRemarkFail(json.error));
 				}
 			})
 			.catch(err => {
-				dispatch(updateRemarkFail(err));
+				dispatch(_updateRemarkFail(err));
 			});
 	}
 }
 
-function updateRemarkSuccess(userid, remark){
+function _updateRemarkSuccess(userid, remark){
 	return {
 		type: Friend.UPDATEREMARK,
 		userid,
@@ -118,7 +122,7 @@ function updateRemarkSuccess(userid, remark){
 	}
 }
 
-function updateRemarkFail(error){
+function _updateRemarkFail(error){
 	return {
 		type: Friend.UPDATEREMARKERROR,
 		error

@@ -3,14 +3,14 @@ import { Statue } from "../constants";
 import Api from "../constants/Api";
 
 // 登录中
-function logining(){
+function _logining(){
 	return {
 		type: Statue.LOGINING
 	}
 }
 
 // 登录失败
-function loginFail(error){
+function _loginFail(error){
 	return {
 		type: Statue.LOGINERROR,
 		error
@@ -18,7 +18,7 @@ function loginFail(error){
 }
 
 // 登录失败
-function loginSuccess(userid){
+function _loginSuccess(userid){
 	return {
 		type: Statue.LOGINED,
 		userid
@@ -28,7 +28,7 @@ function loginSuccess(userid){
 // 异步action
 function loginPost(user, pass){
 	return (dispatch, getState) => {
-		dispatch(logining());
+		dispatch(_logining());
 		return fetch(Api.login, {
 			username: user,
 			password: pass
@@ -37,50 +37,19 @@ function loginPost(user, pass){
 		})
   		.then(json => {
   			if( json.statue && json.statue === "success" ){
-	      		dispatch(loginSuccess(json.userid));
+	      		dispatch(_loginSuccess(json.userid));
   			}else{
-  				dispatch(loginFail(json.error));
+  				dispatch(_loginFail(json.error));
   			}
 	    })
 	    .catch(err => {
-	    	dispatch(loginFail(err));
+	    	dispatch(_loginFail(err));
 	    });
 	}
-}
-
-// 检查登录状态成功
-function checkIsLoginSuccess(){
-	return {
-		type: Statue.LOGINED
-	}
-}
-// 检查登录状态失败
-function checkIsLoginFail(error){
-	return {
-		type: Statue.LOGINERROR,
-		error 
-	}
-}
-// 发一个请求检查登录状态
-function checkIsLogin(){
-	return (dispatch, getState) => {
-		return fetch(Api.checkIsLogin)
-  		.then(json => {
-  			if( json.statue && json.statue === "success" ){  				
-	      		dispatch(checkIsLoginSuccess());
-  			}else{
-  				dispatch(checkIsLoginFail(json.error));
-  			}
-	    })
-	    .catch(err => {
-	    	dispatch(checkIsLoginFail(err))
-	    });
-	}	
 }
 
 const login = {
-	loginPost,
-	checkIsLogin
+	loginPost
 }
 
 export default login;
