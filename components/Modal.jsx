@@ -26,13 +26,20 @@ export default class Modal extends Component{
 
 	// 保存
 	save(){
+		// 改变父组件的state，与同级组件通信
 		this.props.showSaveFn();
 	}
 	
 	render(){
 		const footer = [
-			<button key = "cancel" className = "cancel-btn" onClick = { this.close }>cancel</button>,
-			<button key = "save" className = "save-btn" onClick = { this.save }>save</button>
+			<button key = "cancel" 
+				className = "cancel-btn" 
+				onClick = { this.close }
+			>cancel</button>,
+			<button key = "save" 
+				className = "save-btn" 
+				onClick = { this.save }
+			>save</button>
 		];
 		return (
 			<Dialog 

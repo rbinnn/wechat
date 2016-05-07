@@ -13,7 +13,6 @@ import {
 	} from "../actions";
 import { Statue } from "../constants";
 import FriendsBox from "../components/FriendsBox.jsx";
-import InfoBox from "../components/InfoBox.jsx";
 import MessageBox from "../components/MessageBox.jsx";
 const assign = Object.assign;
 
@@ -26,16 +25,19 @@ class MainBox extends Component{
 	getInfo(){
 		const { actions, personInfo } = this.props; 
 		// actions.checkIsLogin();
+		// 获取个人信息
 		actions.getPersonInfo(personInfo.userid);
+		// 获取好友列表
 		actions.getFriendsList();
+		// 获取未读消息
 		actions.getUnreadPost();
-
-	}
-
-	
+		// 每隔2秒做一次短轮询获取未读消息
+		// setInterval(actions.getUnreadPost.bind(actions), 2000);
+	}	
 
 	render(){
-		const { friends, 
+		const { 
+				friends, 
 				personInfo, 
 				actions, 
 				menu, 
@@ -46,16 +48,22 @@ class MainBox extends Component{
 			<div className = "mainBox">
 				<FriendsBox 
 					friends = { friends }
-					actions = { actions }
 					personInfo = { personInfo }
 					menu = { menu }
-				/>
-				<MessageBox 
-					actions = { actions }
-					message = { message }
+					unread = { message.unread }
 					currentChat = { currentChat }
-					friends = { friends }
+					actions = { actions }
 				/>
+				{
+					currentChat ? 
+						<MessageBox 
+							actions = { actions }
+							message = { message }
+							currentChat = { currentChat }
+							friends = { friends }
+						/> : "" 
+				}
+
 			</div>
 		)
 	}

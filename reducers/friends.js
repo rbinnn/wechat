@@ -16,16 +16,6 @@ function friendInfoModal(state = false, action){
 	}
 }
 
-// 设置当前点击的是哪个好友
-function currentFriendId(state = null, action){
-	switch(action.type){
-		case Friend.CURRENTFRIENDMODAL:
-			return action.id;
-		default:
-		    return state;
-	}
-}
-
 // 好友列表
 function friendsList(state = [], action){
 	switch(action.type){
@@ -52,13 +42,11 @@ function friendsList(state = [], action){
 
 // const intialState = {
 // 	list: [],
-// 	currentFriendId: null,
 // 	modalVisible: false
 // };
 
 const friends = combineReducers({
 	list: friendsList,
-	currentFriendId: currentFriendId,
 	modalVisible: friendInfoModal
 });
 

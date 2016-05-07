@@ -4,25 +4,26 @@ import "../sources/sass/friendCard.scss";
 export default class FriendCard extends Component{
 	constructor(){
 		super();
-		this.getFriendInfo = this.getFriendInfo.bind(this);
-		this.setCurrentChat = this.setCurrentChat.bind(this);
+		this.clickHandler = this.clickHandler.bind(this);
 	}
-	getFriendInfo(){
-		const { userid } = this.props;
-		this.props.setCurrentFriendId(userid);	
-		this.props.getFriendInfo(userid);
-		this.props.showFriendInfoModal();	
-	}
-	setCurrentChat(){
+	clickHandler(e){
+		// 设置当前跟哪个好友聊天
 		this.props.setCurrentChat(this.props.userid);
+		// 清空该好友未读
+		this.props.readUnread(this.props.userid);
 	}
 	render(){
 		return (
 			<li 
-				onDoubleClick = { this.getFriendInfo }
-				onClick = { this.setCurrentChat }
+				onClick = { this.clickHandler }
 			>
-				<img src="/images/webwxgeticon_0.jpg" alt=""/>
+				{
+					this.props.hasUnread ? 
+					<i className="unread-point"></i> : ""
+				}
+				<img 
+					src="/images/webwxgeticon_0.jpg"
+				/>
 				<span>{ this.props.remark || this.props.userid }</span>
 			</li>
 		);

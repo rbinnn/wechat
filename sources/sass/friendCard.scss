@@ -4,6 +4,7 @@
 	overflow-y: scroll;
     flex: 1;
 	li{
+		position: relative;
 		display: flex;
 	    height: 50px;
         padding: 0px 10px;
@@ -22,5 +23,14 @@
 	    	color: #ddd;
 	    	@include text-overflow;
 	    }
+	}
+	.unread-point{
+		border-radius: 50%;
+	    background: #F44336;
+	    width: 12px;
+	    height: 12px;
+	    position: absolute;
+	    left: 4px;
+	    top: 2px;
 	}
 }

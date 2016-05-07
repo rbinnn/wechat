@@ -13,13 +13,13 @@ export default class FriendInfoModal extends Component{
 	componentWillReceiveProps(nextProps) {
 		/* 
 			判断来自上级组件的props的showSave，
-			当showSave为true的时候，表示在同级组件点击了保存按钮，
+			当showSave为true的时候，表示在同级组件（模态窗底部的组件）点击了保存按钮，
 			通知本组件提交表单中内容（同级组件的通信）
 	 	*/
 	 	if( nextProps.showSave === true ){
 	 		const remark = this.state.value;
-	 		const userid = this.props.currentFriendId;
-	 		// 没有改变就直接return掉了
+	 		const userid = this.props.currentChat;
+	 		// 没有改变就传递一个null给父组件，然后return掉了
 	 		if( this.props.friendInfo.remark === remark ){
 	 			this.props.updateRemark(null);
 	 			return ;

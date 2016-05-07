@@ -9,12 +9,11 @@ const assign = Object.assign;
 export default class UserBar extends Component{
 	constructor(){
 		super();
-		this.showUserInfoModal = this.showUserInfoModal.bind(this);
-		this.hideUserInfoModal = this.hideUserInfoModal.bind(this);
 		this.showSaveFn = this.showSaveFn.bind(this);
 		this.updateInfo = this.updateInfo.bind(this);
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.toggleMenuGlobal = this.toggleMenuGlobal.bind(this);
+		// 目的同好友模态框
 		this.state = {
 			showSave: false
 		}
@@ -26,28 +25,37 @@ export default class UserBar extends Component{
 		});
 	}
 
+	/*
+		* 更新个人信息
+		+ updateInfo(data) 个人信息修改了
+		+ updateInfo(null) 个人信息没修改
+	*/
 	updateInfo(data){
+		const { hidePersonInfoModalAction, updatePersonInfoAction } = this.props;
 		// 不管数据有没有修改过，都要取消showSave状态
 		this.setState({
 			showSave: false
 		});
-		this.props.hidePersonInfoModalAction();
+		// 关闭模态窗
+		hidePersonInfoModalAction();
 		// 有数据的话就调用接口提交新的个人信息
 		if( data !== null ){
-			console.log("update the info : ", data);
-			this.props.updatePersonInfoAction(data);
+			updatePersonInfoAction(data);
 		}
 	}
 
 	componentDidMount(){
-		// 全局点击
+		// 绑定全局点击事件
 		document.addEventListener("click", this.toggleMenuGlobal, false)
 	}
 
+	// 点击回调函数
 	toggleMenuGlobal(e){
 		if( e.target === this.refs.menuBtn ){
+			// 点击目标是该按钮
 			this.toggleMenu(false);
 		}else{
+			// 在其他地方点击
 			this.toggleMenu(true);
 		}
 	}
@@ -64,18 +72,13 @@ export default class UserBar extends Component{
 		}		
 	}
 
-	// 展示个人信息模态窗
-	showUserInfoModal(){
-		this.props.showPersonInfoModalAction();		
-	}
-
-	// 关闭个人信息模态窗
-	hideUserInfoModal(){
-		this.props.hidePersonInfoModalAction();
-	}
-
 	render(){
-		const { personInfo, menuState } = this.props;
+		const { 
+			personInfo, 
+			menuState, 
+			hidePersonInfoModalAction, 
+			showPersonInfoModalAction 
+		} = this.props;
 		const { showSave } = this.state;
 		return (
 			<div className = "row" id = "user-bar">
@@ -83,14 +86,14 @@ export default class UserBar extends Component{
 				<span id = "name-txt">{ personInfo.nickName }</span>
 				<div className="iconfont icon-xiala btn" ref= "menuBtn">
 					<ul className = {`list ${ menuState ? "show" : "hide" }`}>
-						<li onClick = { this.showUserInfoModal }>个人信息</li>
+						<li onClick = { showPersonInfoModalAction }>个人信息</li>
 						<li>退出</li>
 					</ul>
 				</div>
 				<Modal 
 					visible = { personInfo.modalVisible }
 					title = "个人信息"
-					close = { this.hideUserInfoModal }
+					close = { hidePersonInfoModalAction }
 					showSaveFn = { this.showSaveFn }
 				>
 					<UserInfoModal 

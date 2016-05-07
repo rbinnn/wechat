@@ -10,6 +10,7 @@ class App extends Component{
 		const { 
 			statue
 		} = this.props;
+		// 通过statue切换登录组件和聊天主组件
 		const isLogin = statue === Statue.LOGINED;
 		return (
 			<div className = "main" onClick = { this.onclick }>

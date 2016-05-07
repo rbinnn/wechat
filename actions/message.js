@@ -160,6 +160,7 @@ function getRecentPost(userid, number = 20){
 			if( json.statue && json.statue === "error" ){
 				dispatch(getRecentFail(json.error));
 			}else{
+				json = json.reverse();
 				dispatch(getRecent(userid, json));
 			}
 		})

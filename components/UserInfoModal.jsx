@@ -77,7 +77,8 @@ export default class UserInfoModal extends Component{
 					<textarea id="u-intro" 
 						placeholder = "your introduction ..." 
 						ref = "intro" 
-						defaultValue = { personInfo.introduction }></textarea>
+						defaultValue = { personInfo.introduction }>
+					</textarea>
 				</div>
 			</form>
 		);

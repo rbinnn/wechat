@@ -23,6 +23,7 @@ class LoginBox extends Component{
 
 	componentWillReceiveProps(props) {
 		if( props.statue === Statue.LOGINING ){
+			// 做一些动画操作...
 			console.log("i am logining!!")
 		}
 	}
@@ -31,13 +32,23 @@ class LoginBox extends Component{
 		return (
 			<form className = "row loginBox">
 				<div className = "item">
-					<input type = "text" id = "username" ref = "username" placeholder = "your name ..."/>
+					<input type = "text" 
+						id = "username" 
+						ref = "username" 
+						placeholder = "your name ..."
+					/>
 				</div>
 				<div className = "item">
-					<input type = "password" id = "password" ref = "password" placeholder = "your password ..."/>
+					<input type = "password" 
+						id = "password" 
+						ref = "password" 
+						placeholder = "your password ..."
+					/>
 				</div>
 				<div className = "item">
-					<button type = "button" onClick = { this.login }>登录</button>
+					<button type = "button" 
+						onClick = { this.login }
+					>登录</button>
 				</div>
 			</form>
 		);
@@ -53,6 +64,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
+	// 只暴露登录相关的action
 	return {		
 		actions: bindActionCreators(loginAction, dispatch)
 	}
