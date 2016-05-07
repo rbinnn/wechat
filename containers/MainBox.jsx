@@ -7,7 +7,9 @@ import {
 		friendAction, 
 		personInfoAction, 
 		logoutAction,
-		menuAction
+		menuAction,
+		messageAction,
+		currentChatAction
 	} from "../actions";
 import { Statue } from "../constants";
 import FriendsBox from "../components/FriendsBox.jsx";
@@ -26,12 +28,20 @@ class MainBox extends Component{
 		// actions.checkIsLogin();
 		actions.getPersonInfo(personInfo.userid);
 		actions.getFriendsList();
+		actions.getUnreadPost();
+
 	}
 
 	
 
 	render(){
-		const { friends, personInfo, actions, menu } = this.props;
+		const { friends, 
+				personInfo, 
+				actions, 
+				menu, 
+				message,
+				currentChat
+			} = this.props;
 		return (
 			<div className = "mainBox">
 				<FriendsBox 
@@ -40,7 +50,12 @@ class MainBox extends Component{
 					personInfo = { personInfo }
 					menu = { menu }
 				/>
-				<MessageBox />
+				<MessageBox 
+					actions = { actions }
+					message = { message }
+					currentChat = { currentChat }
+					friends = { friends }
+				/>
 			</div>
 		)
 	}
@@ -57,7 +72,16 @@ function mapDispatchToProps(dispatch){
 	return {		
 		actions: 
 			bindActionCreators(
-				assign({}, loginAction, personInfoAction, friendAction, logoutAction, menuAction), 
+				assign(
+					{}, 
+					loginAction, 
+					personInfoAction, 
+					friendAction, 
+					logoutAction, 
+					menuAction,
+					messageAction,
+					currentChatAction
+				), 
 				dispatch
 			)
 	}

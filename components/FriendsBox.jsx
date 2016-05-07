@@ -54,7 +54,7 @@ export default class FriendsBox extends Component{
 					personInfo = { this.props.personInfo }
 					updatePersonInfoAction = { actions.updatePersonInfo }
 					showPersonInfoModalAction = { actions.showPersonInfoModal }
-					hidePersonInfoModalAction = { actions.hidePersonInfoModal }
+					hidePersonInfoModalAction = { actions.hidePersonInfoModal }					
 					showMenu = { actions.showMenu }
 					hideMenu = { actions.hideMenu }
 					menuState = { menu }
@@ -69,6 +69,7 @@ export default class FriendsBox extends Component{
 								key = { createKey() } 
 								getFriendInfo = { actions.getFriendInfo }
 								setCurrentFriendId = { actions.setCurrentFriendId }
+								setCurrentChat = { actions.setCurrentChat }
 								hideFriendInfoModal = { actions.closeFriendInfoModal }
 								showFriendInfoModal = { actions.openFriendInfoModal }
 							/>

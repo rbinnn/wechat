@@ -45,7 +45,7 @@ function getRecent(id, list){
 	}
 }
 
-function getRecentFail(err){
+function getRecentFail(error){
 	return {
 		type: Message.GETRECENTERROR,
 		error
@@ -83,9 +83,9 @@ function sendToPost(userid, content){
 // 获得未读消息
 function getUnreadPost(){
 	return (dispatch, getState) => {
-		return getHasUnread
+		return _getHasUnread()
 		.then(list => {
-			return Promise.all(getUnreadByList(list, dispatch))
+			return Promise.all( _getUnreadByList(list, dispatch) )
 		})
 		.then( list => {
 			console.log("get unread list : ", list);
@@ -132,7 +132,7 @@ function _getUnreadById(userid, dispatch){
 }
 
 // 发送异步请求查看有无未读消息，返回一个promise对象
-function getHasUnread(){
+function _getHasUnread(){
 	return fetch(Api.getHasUnread)
 	.then(json => {
 		return new Promise((resolve, reject) => {

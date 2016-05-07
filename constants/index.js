@@ -46,5 +46,9 @@ const Message = {
 	GETRECENTERROR: "GETRECENTERROR"
 }
 
+const CurrentChat = {
+	SETCURRENTCHAT: "SETCURRENTCHAT"
+}
 
-export { Statue, PersonInfo, Menu, Friend, Message };
+
+export { Statue, PersonInfo, Menu, Friend, Message, CurrentChat };
