@@ -77,7 +77,8 @@ export default class UserBar extends Component{
 			personInfo, 
 			menuState, 
 			hidePersonInfoModalAction, 
-			showPersonInfoModalAction 
+			showPersonInfoModalAction,
+			logoutAction 
 		} = this.props;
 		const { showSave } = this.state;
 		return (
@@ -87,7 +88,7 @@ export default class UserBar extends Component{
 				<div className="iconfont icon-xiala btn" ref= "menuBtn">
 					<ul className = {`list ${ menuState ? "show" : "hide" }`}>
 						<li onClick = { showPersonInfoModalAction }>个人信息</li>
-						<li>退出</li>
+						<li onClick = { logoutAction }>退出</li>
 					</ul>
 				</div>
 				<Modal 

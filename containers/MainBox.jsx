@@ -30,9 +30,12 @@ class MainBox extends Component{
 		// 获取好友列表
 		actions.getFriendsList();
 		// 获取未读消息
-		actions.getUnreadPost();
+		function poll(){
+			actions.getUnreadPost.call(actions);
+			// setTimeout(poll, 10000);
+		}
 		// 每隔2秒做一次短轮询获取未读消息
-		// setInterval(actions.getUnreadPost.bind(actions), 2000);
+		poll();
 	}	
 
 	render(){

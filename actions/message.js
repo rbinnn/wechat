@@ -73,6 +73,7 @@ function getUnreadPost(){
 // 根据list生成一组promise对象
 function _getUnreadByList(list = [], dispatch){
 	var promiseList = [];
+	// list的每一个元素好友的id
 	_.forEach(list, item => {
 		promiseList.push( _getUnreadById(item, dispatch) );
 	});
@@ -114,6 +115,7 @@ function _getHasUnread(){
 				reject(json.error);
 				return;
 			}
+			// 无论有没有未读消息，后台返回过来的都是一个数组，没有未读消息的时候，json是一个空数组
 			resolve(json);
 		});
 	});

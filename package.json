@@ -39,6 +39,9 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.1",
+    "express-session": "^1.13.0",
+    "http-proxy": "^1.13.2",
     "lodash": "^4.11.1",
     "rc-dialog": "^6.0.1",
     "react": "^15.0.1",

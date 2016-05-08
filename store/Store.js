@@ -15,6 +15,5 @@ export default function Store(initialState){
 		initialState,
 		Enhancer()
 	);
-
 	return store;
 }

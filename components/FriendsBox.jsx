@@ -81,6 +81,7 @@ export default class FriendsBox extends Component{
 					showMenu = { actions.showMenu }
 					hideMenu = { actions.hideMenu }
 					updatePersonInfoAction = { actions.updatePersonInfo }
+					logoutAction = { actions.logoutPost }
 				/>
 				<Menu />
 				<ul id = "friends-bar">
