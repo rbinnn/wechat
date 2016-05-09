@@ -7,8 +7,9 @@ const proxyUrl = "/proxy.do";
 const defaultOpts = {
 	method: "POST",
 	headers: {
-		"Content-Type": "application/json;charset=utf-8"
-	}
+		"content-type": "application/json;charset=utf-8"
+	},
+	credentials: 'same-origin' // fetch默认不支持响应set-cookie到浏览器，所以要配置一下
 }
 /*
 @url{String}     the fetch url

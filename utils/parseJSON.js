@@ -14,7 +14,7 @@ export default function parseJSON(data){
     try {
         jsonData = JSON.parse(data);
     } catch (e) {
-        console.log(e);
+        console.log("hello,", e, data);
     }
     if (typeof jsonData === "string") {
         return {}

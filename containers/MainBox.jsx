@@ -32,7 +32,7 @@ class MainBox extends Component{
 		// 获取未读消息
 		function poll(){
 			actions.getUnreadPost.call(actions);
-			// setTimeout(poll, 10000);
+			setTimeout(poll, 5000);
 		}
 		// 每隔2秒做一次短轮询获取未读消息
 		poll();

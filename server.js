@@ -9,8 +9,9 @@ var port = 5000;
 var logger = require("./utils/server_log");
 var compiler = webpack(config);
 var request = require("request");
-// var cookies; // cookie，代理跨域不会自动发送cookie
-app.disable('x-powered-by');
+
+
+
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
 app.use(bodyParser.json()); 
@@ -33,7 +34,6 @@ app.post("/proxy.do", function(req, res){
 	// .then(res.json.bind(res))
 	.then(function(result){
 		// 往浏览器写入cookie
-		// ????? why can't set-cookie in !!!!!!!!!!!!!
 		res.append("set-cookie", result.cookie);
 		res.json(result.data);
 	})
@@ -71,35 +71,46 @@ function proxy(req){
 		var data = req.body;
 		// 获得浏览器发过来的cookie
 		var cookie = req.headers["cookie"];
+
 		var options = {
 			form: data.post,
-			method: data.options && data.options.method || "GET"
-		}
-		if( cookie ){
-			options["headers"]["Cookie"] = cookie;
+			method: data.options && data.options.method || "GET",
+			headers: {
+				cookie: cookie || ""
+			}
 		}
 		request(
 			data.url,
 			options, 
 			function(err, res){
-				// // 记录cookie
-				// cookies = res.headers["set-cookie"] || cookies;
-				// // 日志记录，debug的时候可以分析请求与响应
-				// logger.log("cookie::::: ", cookies);
-				// logger.log(res);
 				if(err){
 					reject(err);
 				}else{
-					logger.log(`\nres.body: ${ res.body}\nres.headers['set-cookie']: ${res.headers["set-cookie"]}`);
+					/* 
+						获得wechat后台发过来的cookie，wechat后台只会在登录成功后发送回来1个cookie，
+						其他请求不会，为了防止cookie过期（虽然设的时间也是很长了）
+						所以要手动将该cookie再其他请求的响应中set-cookie进去					
+					*/
+					var wechatCookie = res.headers['set-cookie'] || cookie;  
+					var wechatData = res.body;
+					logger.log(res)
+					logger.log(`\nres.body: ${ wechatData }\nres.headers['set-cookie']: ${ wechatCookie }`);
 					resolve({
-						data: res.body,
-						cookie: res.headers["set-cookie"] // 获得wechat后台发过来的cookie
+						data: wechatData,
+						cookie: wechatCookie
 					});
 				}
 			}
 		);
 	});
 }
+
+// function readFile(name){
+// 	return function(cb){
+// 		console.log(name)
+// 		cb();
+// 	}
+// }
 
 function hasUrl(req){
 	// 判断有无url
