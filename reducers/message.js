@@ -11,9 +11,10 @@ function recent(state = {}, action){
 			obj[action.id] = (state[action.id] || []).concat(action.list);
 			return assign({}, state, obj);
 		case Message.GETRECENT:
+		case Message.UNREADTORECENT:
 			// 从后台拿过来的数据合并本地的数据
 			var obj = create(null);
-			obj[action.id] = _.union( state[action.id] || [], action.list );
+			obj[action.id] = (state[action.id] || []).concat(action.list);
 			return assign({}, state, obj);
 		default:
 			return state;
@@ -28,9 +29,8 @@ function unread(state = {}, action){
 			obj[action.id] = (state[action.id] || []).concat(action.list);
 			return assign({}, state, obj);
 		case Message.READUNREAD:
-			var obj = create(null);
-			obj[action.id] = [];
-			return assign({}, state, obj);
+			delete state[action.id];
+			return state;
 		default:
 			return state;
 	}

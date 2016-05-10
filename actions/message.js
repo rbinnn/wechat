@@ -169,11 +169,21 @@ function _getRecentFail(error){
 	}
 }
 
+// 将未读消息放到最近消息中
+function unreadToRecent(id, list){
+	return {
+		type: Message.UNREADTORECENT,
+		id,
+		list
+	}
+}
+
 const message = {
 	sendToPost,
 	getUnreadPost,
 	readUnread,
-	getRecentPost
+	getRecentPost,
+	unreadToRecent
 }
 
 export default message;

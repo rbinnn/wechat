@@ -83,7 +83,6 @@ export default class FriendsBox extends Component{
 					updatePersonInfoAction = { actions.updatePersonInfo }
 					logoutAction = { actions.logoutPost }
 				/>
-				<Menu />
 				<ul id = "friends-bar">
 					{ 
 						_.map(list, item => {

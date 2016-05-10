@@ -35,12 +35,22 @@ export default class MessageBox extends Component{
 
 	componentWillReceiveProps(nextProps){
 		const { currentChat, actions } = this.props;
+		const { message: nextMessage } = nextProps;
 		/* 
 			currentChat不为空，接收到一个新的currentChat跟当前的不一致
 			去获取最近消息
 		*/
 		if( currentChat && currentChat !== nextProps.currentChat ){
 			actions.getRecentPost(nextProps.currentChat);
+		}else{
+			// 如果两次currentChat都相同，说明还在跟同一个好友聊天
+			if( currentChat in nextMessage["unread"] ){
+				// 如果有该好友的未读消息（因为在同个窗口）
+				// 把未读消息放到最近消息
+				actions.unreadToRecent(currentChat, nextMessage["unread"][currentChat]);
+				// 清空未读消息改变为已读
+				actions.readUnread(currentChat);
+			}			
 		}
 	}
 
