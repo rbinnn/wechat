@@ -10,12 +10,12 @@ var log4js = require("log4js"),
 	level,
 	appenders,
 	networkLog,
-	networkLogFile = "log/network.log";
+	networkLogFile = "private/log/network.log";
 	// typeList = ["debug", "info", "warn", "error"];
 
 function init(){
 
-	doFile();
+	// doFile();
 
 	level = "INFO";
 
