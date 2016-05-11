@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import Dialog from "rc-dialog";
 import 'rc-dialog/assets/index.css';
-import "../sources/sass/modal.scss";
+import "../sources/style/sass/modal.scss";
 
 /**
 <Modal title = "好友资料" visible = { true }>

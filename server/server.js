@@ -1,25 +1,23 @@
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
-var config = require('./webpack.config');
+var config = require('../webpack.config');
 var express = require("express")
 var app = express();
 var bodyParser = require('body-parser');
-var port = 5000;
+var port = 1234;
 var logger = require("./utils/server_log");
 var compiler = webpack(config);
 var request = require("request");
-
-
 
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
-app.use(express.static(__dirname+'/sources'));
+app.use(express.static(__dirname + '/webapp'));
 
 app.get("/", function(req, res) {
-  res.sendFile(__dirname + '/index.html')
+  res.sendFile('/index.html')
 });
 
 // 使用代理的方式解决跨域问题
@@ -104,13 +102,6 @@ function proxy(req){
 		);
 	});
 }
-
-// function readFile(name){
-// 	return function(cb){
-// 		console.log(name)
-// 		cb();
-// 	}
-// }
 
 function hasUrl(req){
 	// 判断有无url

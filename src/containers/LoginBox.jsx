@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { loginAction } from "../actions";
 import { Statue } from "../constants";
-import "../sources/sass/login.scss";
+import "../sources/style/sass/login.scss";
 
 class LoginBox extends Component{
 	constructor(...props){

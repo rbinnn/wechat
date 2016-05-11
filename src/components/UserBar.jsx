@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "../sources/sass/userBar.scss";
-import "../sources/css/iconfont.css";
+import "../sources/style/sass/userBar.scss";
+import "../sources/style/css/iconfont.css";
 import Modal from "./Modal.jsx";
 import UserInfoModal from "./UserInfoModal.jsx";
-import { Menu } from "../constants"
+import { default as avatorPic } from "../sources/images/avatar.jpg";
 const assign = Object.assign;
 
 export default class UserBar extends Component{
@@ -83,7 +83,7 @@ export default class UserBar extends Component{
 		const { showSave } = this.state;
 		return (
 			<div className = "row" id = "user-bar">
-				<img src = "/images/avatar.jpg" />
+				<img src = { avatorPic } />
 				<span id = "name-txt">{ personInfo.nickName }</span>
 				<div className="iconfont icon-xiala btn" ref= "menuBtn">
 					<ul className = {`list ${ menuState ? "show" : "hide" }`}>

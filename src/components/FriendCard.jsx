@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "../sources/sass/friendCard.scss";
+import { default as friendPic } from "../sources/images/webwxgeticon_0.jpg";
+import "../sources/style/sass/friendCard.scss";
 
 export default class FriendCard extends Component{
 	constructor(){
@@ -22,7 +23,7 @@ export default class FriendCard extends Component{
 					<i className="unread-point"></i> : ""
 				}
 				<img 
-					src="/images/webwxgeticon_0.jpg"
+					src= { friendPic }
 				/>
 				<span>{ this.props.remark || this.props.userid }</span>
 			</li>

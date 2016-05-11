@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import LoginBox from "./LoginBox.jsx";
 import MainBox from "./MainBox.jsx";
 import { Statue } from "../constants";
-import "../sources/sass/common.scss";
+import "../sources/style/sass/common.scss";
 
 class App extends Component{
 	render(){

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import UserBar from "./UserBar.jsx";
 import FriendCard from "./FriendCard.jsx";
-import Menu from "./Menu.jsx";
-import "../sources/sass/friendsBox.scss";
+import "../sources/style/sass/friendsBox.scss";
 import Modal from "./Modal.jsx";
 import FriendInfoModal from "./FriendInfoModal.jsx";
 import _ from "lodash";

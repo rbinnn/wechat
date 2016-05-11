@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../sources/sass/messageBox.scss";
+import "../sources/style/sass/messageBox.scss";
 import MessageCard from "./MessageCard.jsx";
 import ChatInput from "./ChatInput.jsx";
 import _ from "lodash";

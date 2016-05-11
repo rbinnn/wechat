@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { default as friendPic } from "../sources/images/webwxgeticon_0.jpg";
 
 export default class MessageCard extends Component{
 	render(){
@@ -6,7 +7,7 @@ export default class MessageCard extends Component{
 		const name =  direction === 'left' ? 'm-left' : 'm-right';
 		return (
 			<div className = {`item ${name}`}>
-				<img src = "/images/webwxgeticon_0.jpg" />
+				<img src = { friendPic } />
 				<p>{ content }</p>
 			</div>
 		);
